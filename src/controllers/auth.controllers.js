@@ -15,6 +15,7 @@ const generateAccessAndRefershTokens = async(userId) => {
 
         return {accessToken,refreshToken} 
     }catch(error){
+        console.error("JWT_GENERATION_ERROR:", error);
         throw new ApiError(
             500,
             "Something went wrong while generating access token"
@@ -77,5 +78,53 @@ const registerUser = asyncHandler(async(req,res)=>{
       )
 });
 
+const login = asyncHandler(async(req,res)=>{
+    const {email, password, username} = req.body
 
-export {registerUser};
+    if(!email){
+        throw new ApiError(400,"Email is required")
+    }
+
+    const user = await User.findOne({email});
+
+    if(!user){
+        throw new ApiError(400,"User does not exist")
+    }
+
+    const isPasswordValid = await user.isPasswordCorrect(password);
+
+    if(!isPasswordValid){
+        throw new ApiError(400,"invalid credentials");
+    }
+
+    const {accessToken,refreshToken} = await generateAccessAndRefershTokens(user._id);
+
+     const loggedInUser = await User.findById(user._id).select(
+        "-password -refreshToken -emailVerificationToken -emailVerificationExpiry",
+    )
+
+    const options = {
+        httpOnly: true,
+        secure: true 
+    }
+
+    return res
+      .status(200)
+      .cookie("accessToken", accessToken, options)
+      .cookie("refreshtoken", refreshToken, options)
+      .json(
+        new ApiResponse(
+            200,
+            {
+                user: loggedInUser,
+                accessToken,
+                refreshToken
+            },
+            "User loggedin User"
+        )
+      )
+
+
+})
+
+export {registerUser,login};
