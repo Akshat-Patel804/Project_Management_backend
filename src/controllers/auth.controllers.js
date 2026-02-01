@@ -3,7 +3,7 @@ import {ApiResponse} from "../utils/api-response.js";
 import {ApiError} from '../utils/api-error.js';
 import {asyncHandler} from "../utils/async-handler.js"
 import {emailVerificationMailContent, forgotPasswordMailGenContent, sendEmail} from "../utils/mail.js"
-import {jwt} from "jsonwebtoken"
+import jwt from "jsonwebtoken"
 
 const generateAccessAndRefershTokens = async(userId) => {
     try{

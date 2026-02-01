@@ -58,5 +58,5 @@ const userResetPasswordValidator = () => {
 }
 
 export {
-    userRegisterValidator,userLoginValidator,userChangeCurrentPasswordValidator,userForgotPasswordValidator
+    userRegisterValidator,userLoginValidator,userChangeCurrentPasswordValidator,userForgotPasswordValidator,userResetPasswordValidator
 }
