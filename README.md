@@ -100,18 +100,5 @@ All project routes require authentication.
 - `DELETE /api/v1/projects/:projectId/members/:userId`
   - Remove member (Admin only)
 
-## Notes on current implementation
-- Task models and controllers are present, but task routes are not registered in `src/app.js`.
-- Note and subtask models exist, but the API endpoints for notes and subtasks are not yet exposed through routes.
-- Role-based permission middleware is implemented for project operations.
-- Email notification uses Mailgen and Nodemailer with Mailtrap settings.
-
-## Interview talking points
-- I built a modular Express backend with route/controller separation.
-- I used Mongoose models for users, projects, tasks, project members, notes, and subtasks.
-- I implemented JWT authentication plus refresh tokens and secure cookie handling.
-- I added express-validator for request validation and custom API response/error wrappers for consistency.
-- I designed project-level RBAC so only admins can update/delete projects and manage members.
-- I integrated email-based verification and forgot-password flow using Mailtrap.
 
 
