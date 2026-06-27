@@ -114,9 +114,4 @@ All project routes require authentication.
 - I designed project-level RBAC so only admins can update/delete projects and manage members.
 - I integrated email-based verification and forgot-password flow using Mailtrap.
 
-## Future improvements
-- Expose task, subtask, and note routes in the router layer.
-- Complete `updateTask`, `deleteTask`, `createSubTask`, `updateSubTask`, and `deleteSubTask` controllers.
-- Add comprehensive unit/integration tests.
-- Improve project query performance and fix aggregation logic.
-- Add better error handling for email delivery failure and token edge cases.
+
